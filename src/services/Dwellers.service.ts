@@ -33,21 +33,23 @@ export class Dweller {
   view(): Promise<IDweller[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        await this.connection('dwellers')
-          .select(
-            'id',
-            'name',
-            'father',
-            'mother',
-            'Strength',
-            'Perception',
-            'Endurance',
-            'Charisma',
-            'Intelligence',
-            'Agility',
-            'Luck',
-            'born',
-            'updatedAt',
+        await this.connection
+          .raw(
+            'SELECT a.id, a.name, a.lvl, a.Strength, a.Perception, a.Endurance, a.Charisma, a.Intelligence, a.Agility, a.Luck, a.gender, a.bornAt, b.name as father, c.name as mother,e.name as job, a.updateAt FROM dwellers a  LEFT JOIN dwellers b on a.id = b.father LEFT JOIN dwellers c on a.id = c.mother LEFT JOIN assignment d on a.id = d.dweller JOIN job e on e.id = d.job ORDER BY a.name ASC,a.lvl DESC',
+          )
+          .then((response) => resolve(response))
+          .catch((err: Error) => reject(err.message));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+  getDwellers(): Promise<IDweller[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.connection
+          .raw(
+            'SELECT a.id, a.name,a.gender FROM dwellers a ORDER BY a.name ASC',
           )
           .then((response) => resolve(response))
           .catch((err: Error) => reject(err.message));
@@ -58,6 +60,8 @@ export class Dweller {
   }
   create(
     name: string,
+    lvl: number,
+    gender: string,
     Strength: number,
     Perception: number,
     Endurance: number,
@@ -65,8 +69,7 @@ export class Dweller {
     Intelligence: number,
     Agility: number,
     Luck: number,
-    born: Date,
-    updatedAt: Date,
+    bornAt: string,
     father?: string,
     mother?: string,
   ) {
@@ -83,6 +86,8 @@ export class Dweller {
           .insert({
             id,
             name,
+            lvl,
+            gender,
             Strength,
             Perception,
             Endurance,
@@ -90,8 +95,7 @@ export class Dweller {
             Intelligence,
             Agility,
             Luck,
-            born,
-            updatedAt,
+            bornAt,
             father,
             mother,
           })
@@ -125,14 +129,14 @@ export class Dweller {
             'Intelligence',
             'Agility',
             'Luck',
-            'born',
-            'updatedAt',
+            'bornAt',
+            'updateAt',
           )
           .where({ id })
           .first()
           .then((response) => {
-            if (response.length > 0) return resolve(response);
-            reject('Invalid ID');
+            if (response) return resolve(response);
+            return reject('Invalid ID');
           })
           .catch((err: Error) => reject(err.message));
       } catch (err) {
