@@ -1,1 +1,2 @@
-export * from './loader';
+import Spinner from './loader';
+export { Spinner };

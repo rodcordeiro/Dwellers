@@ -16,6 +16,7 @@ export default {
     seeds: {
       directory: `${__dirname}/src/database/seeds`,
     },
+    useNullAsDefault: true,
   },
 
   staging: {
