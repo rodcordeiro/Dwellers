@@ -2,9 +2,9 @@
   "name": "dwellers",
   "version": "1.0.0",
   "description": "",
-  "main": "./bin/src/cli.js",
+  "main": "./bin/cli.js",
   "bin": {
-    "fallout": "./bin/src/cli.js"
+    "fallout": "./bin/cli.js"
   },
   "files": [
     "bin/**/**"

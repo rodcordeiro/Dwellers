@@ -5,10 +5,10 @@ import { join, resolve } from 'path';
 import { readFileSync } from 'fs';
 import { UpdateNotifier } from 'update-notifier';
 
-import Dweller from './commands/Dwellers';
+import Dweller from './src/commands/Dwellers';
 
 const pkg = JSON.parse(
-  readFileSync(resolve(__dirname, '../package.json'), 'utf8'),
+  readFileSync(resolve(__dirname, './package.json'), 'utf8'),
 );
 
 const notifier = new UpdateNotifier({ pkg, shouldNotifyInNpmScript: true });
