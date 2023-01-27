@@ -26,7 +26,7 @@ const showDwellers = (data: any[]) => {
       dweller.job,
     ]),
   );
-  return console.log(table.toString());
+  return console.table(table.toString());
 };
 
 // const spinner = new Spinner().spinner;
