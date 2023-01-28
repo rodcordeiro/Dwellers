@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-import program from "commander";
-import { join, resolve } from "path";
-import { readFileSync } from "fs";
+import program from 'commander';
+import { join, resolve } from 'path';
+import { readFileSync } from 'fs';
 // import { UpdateNotifier } from 'update-notifier';
 
-import Dweller from "./src/commands/dwellers.command";
+import Dweller from './src/commands/dweller';
 
 const pkg = JSON.parse(
-  readFileSync(resolve(__dirname, "./package.json"), "utf8")
+  readFileSync(resolve(__dirname, './package.json'), 'utf8'),
 );
 
 // const notifier = new UpdateNotifier({ pkg, shouldNotifyInNpmScript: true });
@@ -23,7 +23,7 @@ const cli = program.program;
 cli.addCommand(Dweller);
 
 cli
-  .version(pkg.version, "-v,--version", "Shows cli version")
+  .version(pkg.version, '-v,--version', 'Shows cli version')
   .allowUnknownOption(false)
   .allowExcessArguments(false);
 

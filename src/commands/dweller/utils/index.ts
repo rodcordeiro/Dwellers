@@ -1,10 +1,10 @@
-import Table from "cli-table";
-import { Dweller } from "./interface";
+import Table from 'cli-table';
+import { Dweller } from '../../../utils/interface';
 
 /** Renders a table with the dwellers data */
 export function renderDwellers(data: Dweller[]) {
   const table = new Table({
-    head: ["id", "Name", "lvl", "S", "P", "E", "C", "I", "A", "L", "Job"],
+    head: ['id', 'Name', 'lvl', 'S', 'P', 'E', 'C', 'I', 'A', 'L', 'Job'],
     colWidths: [10, 40, 5, 5, 5, 5, 5, 5, 5, 5, 20],
   });
 
@@ -21,7 +21,7 @@ export function renderDwellers(data: Dweller[]) {
       String(dweller.Agility),
       String(dweller.Luck),
       dweller.job!,
-    ])
+    ]),
   );
 
   return table.toString();
