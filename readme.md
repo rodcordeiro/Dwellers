@@ -27,3 +27,7 @@
   - [ ] create
   - [ ] update
   - [ ] delete
+- [ ] Log updates
+  - [ ] Dwellers status
+  - [ ] Parents status at borning time
+  - [ ] Building upgrades

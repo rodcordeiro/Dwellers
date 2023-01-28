@@ -104,5 +104,6 @@
 		"transpileOnly": true,
 		"files": true,
 		"experimentalResolver": true
-	}
+	},
+  "exclude": ["__tests__"]
 }
