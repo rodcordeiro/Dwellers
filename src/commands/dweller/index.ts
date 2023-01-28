@@ -45,105 +45,107 @@ command
     );
     const service = new DwellerService();
     const prompt = createPromptModule();
-    const data = await prompt([
-      {
-        type: 'string',
-        name: 'name',
-        message: 'Dweller name:',
-      },
-      {
-        type: 'number',
-        name: 'lvl',
-        message: 'Dweller lvl:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'list',
-        name: 'gender',
-        message: 'Dweller gender:',
-        choices: ['F', 'M'],
-      },
+    
+    const data = {};
+    // const data = await prompt([
+    //   {
+    //     type: 'string',
+    //     name: 'name',
+    //     message: 'Dweller name:',
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'lvl',
+    //     message: 'Dweller lvl:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'list',
+    //     name: 'gender',
+    //     message: 'Dweller gender:',
+    //     choices: ['F', 'M'],
+    //   },
 
-      {
-        type: 'number',
-        name: 'Strength',
-        message: 'Dweller Strength:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Perception',
-        message: 'Dweller Perception:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Endurance',
-        message: 'Dweller Endurance:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Charisma',
-        message: 'Dweller Charisma:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Intelligence',
-        message: 'Dweller Intelligence:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Agility',
-        message: 'Dweller Agility:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'number',
-        name: 'Luck',
-        message: 'Dweller Luck:',
-        default: 1,
-        validate: (input) => !isNaN(input),
-      },
-      {
-        type: 'list',
-        name: 'vaultKid',
-        message: 'Does the dweller are born in our vault?',
-        choices: ['Yes', 'No'],
-      },
-    ]);
-    if (data.vaultKid === 'Yes') {
-      const [men, women] = await Promise.all([
-        service.getMale().then((response) => response),
-        service.getFemale().then((response) => response),
-      ]);
-      const { father, mother } = await prompt([
-        {
-          type: 'list',
-          name: 'father',
-          message: 'Who is the father?',
-          choices: men.map((dweller) => dweller.name),
-        },
-        {
-          type: 'list',
-          name: 'mother',
-          message: 'Who is the mother?',
-          choices: women.map((dweller) => dweller.name),
-        },
-      ]);
-      data.father = father;
-      data.mother = mother;
-    }
-    console.log(data);
+    //   {
+    //     type: 'number',
+    //     name: 'Strength',
+    //     message: 'Dweller Strength:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Perception',
+    //     message: 'Dweller Perception:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Endurance',
+    //     message: 'Dweller Endurance:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Charisma',
+    //     message: 'Dweller Charisma:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Intelligence',
+    //     message: 'Dweller Intelligence:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Agility',
+    //     message: 'Dweller Agility:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'number',
+    //     name: 'Luck',
+    //     message: 'Dweller Luck:',
+    //     default: 1,
+    //     validate: (input) => !isNaN(input),
+    //   },
+    //   {
+    //     type: 'list',
+    //     name: 'vaultKid',
+    //     message: 'Does the dweller are born in our vault?',
+    //     choices: ['Yes', 'No'],
+    //   },
+    // ]);
+    // if (data.vaultKid === 'Yes') {
+    //   const [men, women] = await Promise.all([
+    //     service.getMale().then((response) => response),
+    //     service.getFemale().then((response) => response),
+    //   ]);
+    //   const { father, mother } = await prompt([
+    //     {
+    //       type: 'list',
+    //       name: 'father',
+    //       message: 'Who is the father?',
+    //       choices: men.map((dweller) => dweller.name),
+    //     },
+    //     {
+    //       type: 'list',
+    //       name: 'mother',
+    //       message: 'Who is the mother?',
+    //       choices: women.map((dweller) => dweller.name),
+    //     },
+    //   ]);
+    //   data.father = father;
+    //   data.mother = mother;
+    // }
+    console.log({ data });
   });
 
 export default command;
