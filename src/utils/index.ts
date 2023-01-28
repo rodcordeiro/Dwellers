@@ -1,2 +1,2 @@
-import Spinner from './loader';
+import Spinner from './loader.js';
 export { Spinner };

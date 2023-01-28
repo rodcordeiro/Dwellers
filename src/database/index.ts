@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import knex, { Knex } from 'knex';
-import { config } from '../../knexfile';
+import { config } from '../../knexfile.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

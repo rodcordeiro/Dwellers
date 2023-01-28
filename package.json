@@ -2,8 +2,8 @@
   "name": "dwellers",
   "version": "1.0.0",
   "description": "",
-  "main": "./bin/cli.js",
-  "type": "commonjs",
+  "exports": "./bin/cli.js",
+  "type": "module",
   "bin": {
     "fallout": "./bin/cli.js"
   },
@@ -14,7 +14,7 @@
     "start": "node ./bin/cli.js",
     "prebuild": "rimraf bin",
     "build": "npx tsc -b",
-    "dev": "npx ts-node ./cli.ts",
+    "dev": "npx ts-node --esm ./cli.ts",
     "test": "jest",
     "fix": "npm run lint && npm run prettier",
     "lint": "eslint --ignore-path .eslintignore --fix --ext .ts,.tsx,.js,.jsx .",

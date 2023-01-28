@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Table from 'cli-table';
-import { Dweller } from '../../../utils/interface';
+import { Dweller } from '../../../utils/interface.js';
 
 /** Renders a table with the dwellers data */
 export function renderDwellers(data: Dweller[]) {
   const table = new Table({
     head: ['id', 'Name', 'lvl', 'S', 'P', 'E', 'C', 'I', 'A', 'L', 'Job'],
-    colWidths: [10, 40, 5, 5, 5, 5, 5, 5, 5, 5, 20],
+    colWidths: [45, 40, 5, 5, 5, 5, 5, 5, 5, 5, 20],
   });
 
   data.map((dweller) =>
