@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./bin/cli.js",
+  "type": "commonjs",
   "bin": {
     "fallout": "./bin/cli.js"
   },
