@@ -1,40 +1,24 @@
-import type { Knex } from 'knex';
-import { join, resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 
 // Update with your config settings.
 
-export const config: { [key: string]: Knex.Config } = {
+export const config = {
   development: {
     client: 'sqlite3',
     connection: {
       filename: './src/database/dwellers.sqlite3',
     },
     migrations: {
-      directory: `${__dirname}/src/database/migrations`,
+      directory: `./src/database/migrations`,
     },
     seeds: {
-      directory: `${__dirname}/src/database/seeds`,
-    },
-    useNullAsDefault: true,
-  },
-  test: {
-    client: 'sqlite3',
-    connection: {
-      filename: './src/database/test.sqlite3',
-    },
-    migrations: {
-      directory: `${__dirname}/src/database/migrations`,
-    },
-    seeds: {
-      directory: `${__dirname}/src/database/seeds`,
+      directory: `./src/database/seeds`,
     },
     useNullAsDefault: true,
   },
 
+  
   staging: {
     client: 'postgresql',
     connection: {
