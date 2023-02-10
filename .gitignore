@@ -1,5 +1,6 @@
+.idea/
+.vscode/
 node_modules/
-package-lock.json
-coverage/
-bin/
-test.sqlite3
+build/
+tmp/
+temp/

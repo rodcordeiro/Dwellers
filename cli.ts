@@ -1,34 +1,35 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { join, resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { resolve } from 'path';
 import { readFileSync } from 'fs';
-// import { UpdateNotifier } from 'update-notifier';
-
-const __filename = fileURLToPath(import.meta.url);
-const _currentdir = dirname(__filename);
-
-import Dweller from './src/commands/dweller/index.js';
+import 'reflect-metadata';
 
 const pkg = JSON.parse(
-  readFileSync(resolve(_currentdir, './package.json'), 'utf8'),
+  readFileSync(resolve(__dirname, './package.json'), 'utf8'),
 );
 
-// const notifier = new UpdateNotifier({ pkg, shouldNotifyInNpmScript: true });
-// notifier.fetchInfo();
-// if (notifier.update) {
-//   console.log(`Update available: ${notifier.update.latest}`);
-// }
+import { AppDataSource } from './src/database.connection';
 
-// console.log(process.env.DEBUG);
-const cli = program;
+import Dweller from './src/commands/dweller';
+import Building from './src/commands/build';
+import Jobs from './src/commands/jobs';
 
-cli.addCommand(Dweller);
+AppDataSource.initialize()
+  .then(() => {
+    const cli = program;
+    console.log(`${__dirname}/**/migrations/*.{ts,js}`);
+    cli
+      .version(pkg.version, '-v,--version', 'Shows cli version')
+      .allowUnknownOption(false)
+      .allowExcessArguments(false);
 
-cli
-  .version(pkg.version, '-v,--version', 'Shows cli version')
-  .allowUnknownOption(false)
-  .allowExcessArguments(false);
+    cli.addCommand(Dweller);
+    cli.addCommand(Building);
+    cli.addCommand(Jobs);
 
-cli.parse(process.argv);
+    cli.parse(process.argv);
+  })
+  .catch((err) => {
+    throw err;
+  });

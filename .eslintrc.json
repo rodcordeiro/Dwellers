@@ -11,19 +11,5 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {
-    "no-empty-function": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "camelcase": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "moduleDirectory": ["node_modules", "src/"]
-      },
-      "typescript": {}
-    }
-  }
+  "rules": {}
 }

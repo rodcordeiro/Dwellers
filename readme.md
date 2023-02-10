@@ -1,33 +1,7 @@
-# Dwellers CLI
+# Awesome Project Build with TypeORM
 
-## Goals
+Steps to run this project:
 
-- [ ] handle dwellers
-  - [x] list
-  - [ ] create
-  - [ ] update
-  - [ ] delete
-- [ ] handle buildings
-  - [ ] list
-  - [ ] create
-  - [ ] update
-  - [ ] delete
-- [ ] handle jobs
-  - [ ] list
-  - [ ] create
-  - [ ] update
-  - [ ] delete
-- [ ] handle weapons
-  - [ ] list
-  - [ ] create
-  - [ ] update
-  - [ ] delete
-- [ ] handle clothes
-  - [ ] list
-  - [ ] create
-  - [ ] update
-  - [ ] delete
-- [ ] Log updates
-  - [ ] Dwellers status
-  - [ ] Parents status at borning time
-  - [ ] Building upgrades
+1. Run `npm i` command
+2. Setup database settings inside `data-source.ts` file
+3. Run `npm start` command

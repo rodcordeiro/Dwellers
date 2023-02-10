@@ -1,13 +1,13 @@
-name: 'Scan code and validate build'
+name: "Scan code and validate build"
 
 on:
   push:
-    branches: ['main', 'feat/**', 'bug/**', 'develop']
+    branches: ["main", "feat/**", "bug/**", "develop"]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [main]
   schedule:
-    - cron: '0 3 * * 1'
+    - cron: "0 3 * * 1"
 
 jobs:
   analyze:
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['typescript']
+        language: ["typescript"]
 
     steps:
       - name: Checkout repository
@@ -51,6 +51,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci
       - run: npm run build --if-present

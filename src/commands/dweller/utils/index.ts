@@ -1,29 +1,33 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Table from 'cli-table';
-import { Dweller } from '../../../utils/interface.js';
+import { Dweller } from '../../../entities/Dweller';
 
 /** Renders a table with the dwellers data */
 export function renderDwellers(data: Dweller[]) {
-  const table = new Table({
+  //   console.log(data);
+  const table: Table = new Table({
     head: ['id', 'Name', 'lvl', 'S', 'P', 'E', 'C', 'I', 'A', 'L', 'Job'],
     colWidths: [45, 40, 5, 5, 5, 5, 5, 5, 5, 5, 20],
   });
+  if (Array.isArray(data)) {
+    data.map((dweller) =>
+      table.push([
+        dweller._id,
+        dweller.name,
+        dweller.lvl,
+        dweller.Strength,
+        dweller.Perception,
+        dweller.Endurance,
+        dweller.Charisma,
+        dweller.Intelligence,
+        dweller.Agility,
+        dweller.Luck,
+        dweller.job,
+      ]),
+    );
+  } else {
+    table.push(data);
+  }
 
-  data.map((dweller) =>
-    table.push([
-      dweller.id!,
-      dweller.name,
-      String(dweller.lvl),
-      String(dweller.Strength),
-      String(dweller.Perception),
-      String(dweller.Endurance),
-      String(dweller.Charisma),
-      String(dweller.Intelligence),
-      String(dweller.Agility),
-      String(dweller.Luck),
-      dweller.job!,
-    ]),
-  );
-
-  return table.toString();
+  return table;
 }

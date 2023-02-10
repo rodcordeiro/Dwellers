@@ -1,13 +1,14 @@
 import { Command } from 'commander';
 import { createPromptModule } from 'inquirer';
 import chalk from 'chalk';
-import { DwellerService } from '../../services/dwellers.service.js';
-import { renderDwellers } from './utils/index.js';
-import { Spinner } from '../../utils/index.js';
-
-const spinner = new Spinner().spinner;
+import { v4 as uuid } from 'uuid';
+import { Spinner } from '../../utils';
+import { DwellerService } from '../../services/dwellers.service';
+// import { renderDwellers } from './utils';
 
 const command = new Command('dweller');
+const spinner = new Spinner().spinner;
+
 command.helpOption('-h,--help', 'Dweller feature');
 command.description(
   'Dwellers features. Allow view, create, update and delete dwellers',
@@ -22,14 +23,31 @@ command
   .option('--i, --id [dweller]', 'Filter dby dweller id')
   .action(async ({ id }: { id?: string }) => {
     spinner.start('Hello Sir, requesting information...');
-
     const service = new DwellerService();
-    const data = await service.view({ id }).then((response) => response);
+    let data: any;
+    if (id) {
+      data = await service
+        .findById(id)
+        .then((response) => response)
+        .catch((err: Error) => {
+          spinner.fail(err.message);
+          spinner.stop();
+        });
+    } else {
+      data = await service
+        .list()
+        .then((response) => response)
+        .catch((err: Error) => {
+          spinner.fail(err.message);
+          spinner.stop();
+        });
+    }
 
     spinner.succeed('Here are your dwellers Sir!');
     spinner.stop();
 
-    console.table(renderDwellers(data));
+    console.table(data);
+    // console.table(renderDwellers(data));
     return;
   });
 
@@ -143,25 +161,27 @@ command
           choices: women.map((dweller) => dweller.name),
         },
       ]);
-      data.father = men.filter((dweller) => dweller.name === father)[0].id;
-      data.mother = women.filter((dweller) => dweller.name === mother)[0].id;
+      data.father = men.filter((dweller) => dweller.name === father)[0]._id;
+      data.mother = women.filter((dweller) => dweller.name === mother)[0]._id;
     }
+
     spinner.start('Wait a moment, registering...');
-    // console.log({ data });
+    const _id = uuid();
     await service
-      .create(data)
-      .then((response) => {
+      .register({
+        ...data,
+        _id,
+      })
+      .then(() => {
         spinner.succeed(
-          `New dweller successfully created! Dweller ${data.name} has received the ${response.id} identifier`,
+          `New dweller successfully created! Dweller ${data.name} has received the ${_id} identifier`,
         );
         spinner.stop();
       })
       .catch((err: Error) => {
         spinner.fail(err.message);
         spinner.stop();
-      })
-      .finally(() => service.close());
+      });
     return;
   });
-
 export default command;
