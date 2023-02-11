@@ -9,7 +9,7 @@ import {
 import { Building } from './Buildings';
 
 @Entity('jobs')
-@Index('idx_assignment', ['_id', 'name', 'place'])
+@Index('idx_job', ['_id', 'name', 'place'])
 export class Job {
   @PrimaryColumn({ type: 'varchar', length: '100' })
   _id: string;

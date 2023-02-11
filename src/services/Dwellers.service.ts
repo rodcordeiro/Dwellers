@@ -15,6 +15,13 @@ export class DwellerService {
     });
   }
 
+  async findByName(name: string) {
+    return (await dwellerRepository.find()).find((dweller) => {
+      if (dweller.name.toLowerCase().includes(name.toLowerCase()))
+        return dweller;
+    });
+  }
+
   async register(data: Dweller) {
     const dweller = dwellerRepository.create(data);
     return await dwellerRepository
@@ -44,6 +51,27 @@ export class DwellerService {
         gender: 'F',
       })
       .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async update(data: Dweller) {
+    return await dwellerRepository
+      .update({ _id: data._id }, data)
+      .then(() => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+  async delete(data: Dweller) {
+    return await dwellerRepository
+      .delete({ _id: data._id })
+      .then(() => {
+        return data;
+      })
       .catch((err) => {
         throw err;
       });

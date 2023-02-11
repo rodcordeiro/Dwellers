@@ -10,9 +10,15 @@ export class BuildingService {
   }
 
   async findById(_id: string) {
-    return await buildingRepository.findOneBy({
-      _id,
-    });
+    return await buildingRepository
+      .find({
+        loadRelationIds: true,
+      })
+      .then((response) => {
+        const build = response.filter((build) => build._id === _id);
+        // console.log(build);
+        return build[0];
+      });
   }
 
   async register(data: Building) {

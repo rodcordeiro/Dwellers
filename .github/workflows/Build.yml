@@ -1,8 +1,8 @@
-name: "Build Code"
+name: 'Build Code'
 
 on:
   push:
-    branches: "master"
+    branches: 'master'
 jobs:
   analyze:
     name: Analyze code for any code vulnerability
@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ["typescript"]
+        language: ['typescript']
 
     steps:
       - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
       - run: yarn install
       # - run: yarn test
       - run: yarn run build

@@ -1,9 +1,17 @@
-import { Entity, OneToOne, JoinColumn, PrimaryGeneratedColumn, Index } from 'typeorm';
-import { Building } from './Buildings';
+import {
+  Entity,
+  OneToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+  Index,
+  UpdateDateColumn,
+  ManyToOne,
+} from 'typeorm';
+import { Job } from './Jobs';
 import { Dweller } from './Dweller';
 
 @Entity('assignments')
-@Index('idx_assignment',['_id','dweller','place'])
+@Index('idx_assignment', ['_id', 'dweller', 'job'])
 export class Assignment {
   @PrimaryGeneratedColumn()
   _id: string;
@@ -15,10 +23,13 @@ export class Assignment {
   @JoinColumn({ name: 'dweller', referencedColumnName: '_id' })
   dweller: string;
 
-  @OneToOne(() => Building, (build) => build._id, {
+  @ManyToOne(() => Job, (job) => job._id, {
     onUpdate: 'SET NULL',
     onDelete: 'SET NULL',
   })
-  @JoinColumn({ name: 'place', referencedColumnName: '_id' })
-  place: string;
+  @JoinColumn({ name: 'job', referencedColumnName: '_id' })
+  job: string;
+
+  @UpdateDateColumn()
+  updated: string;
 }

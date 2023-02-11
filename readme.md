@@ -2,11 +2,11 @@
 
 ## Goals
 
-- [ ] handle dwellers
+- [x] handle dwellers
   - [x] list
   - [x] create
-  - [ ] update
-  - [ ] delete
+  - [x] update
+  - [x] delete
 - [ ] handle buildings
   - [x] list
   - [x] create
@@ -15,7 +15,7 @@
 - [ ] handle jobs
   - [x] list
   - [x] create
-  - [ ] assign to dweller
+  - [x] assign to dweller
   - [ ] update
   - [ ] delete
 - [ ] handle weapons

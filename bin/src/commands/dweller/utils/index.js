@@ -1,7 +1,6 @@
 // /* eslint-disable @typescript-eslint/no-non-null-assertion */
 // import Table from 'cli-table';
 // import { Dweller } from '../../../entities/Dweller';
-
 // /** Renders a table with the dwellers data */
 // export function renderDwellers(data: Dweller[]) {
 //   //   console.log(data);
@@ -28,6 +27,6 @@
 //   } else {
 //     table.push(data);
 //   }
-
 //   return table;
 // }
+//# sourceMappingURL=index.js.map

@@ -134,15 +134,23 @@ command
         type: 'list',
         name: 'job',
         message: 'Select the new job:',
-        choices: jobs.map((job) => job.name),
+        choices: jobs.map((job) => job.name).sort(),
       },
     ]);
-
-    console.log(data);
-
-    // Find if dweller already has a job and update it
-    // register dweller job
-    
+    spinner.start('Registration started sir!');
+    await service
+      .assing(
+        jobs.filter((job) => job.name === data.job)[0],
+        dwellers.filter((dweller) => dweller.name === data.dweller)[0],
+      )
+      .then(() => {
+        spinner.succeed('This dweller will gonna be a great worker!');
+        spinner.stop();
+      })
+      .catch((err: Error) => {
+        spinner.fail(err.message);
+        spinner.stop();
+      });
   });
 
 export default command;
