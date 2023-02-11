@@ -212,7 +212,20 @@ command
     let dweller: Dweller;
 
     if (name) {
-      dweller = await service.findByName(name);
+      const search = await service.findByName(name);
+      if (search.length > 1) {
+        const { selected } = await prompt([
+          {
+            type: 'list',
+            name: 'selected',
+            message: 'Who bring us some news?',
+            choices: search.map((dweller) => dweller.name),
+          },
+        ]);
+        dweller = search.find((d) => d.name === selected);
+      } else {
+        dweller = search[0];
+      }
     } else {
       const list = await service.list();
       const { selected } = await prompt([
@@ -312,7 +325,20 @@ command
     let dweller: Dweller;
 
     if (name) {
-      dweller = await service.findByName(name);
+      const search = await service.findByName(name);
+      if (search.length > 1) {
+        const { selected } = await prompt([
+          {
+            type: 'list',
+            name: 'selected',
+            message: 'Who bring us some news?',
+            choices: search.map((dweller) => dweller.name),
+          },
+        ]);
+        dweller = search.find((d) => d.name === selected);
+      } else {
+        dweller = search[0];
+      }
     } else {
       const list = await service.list();
       const { selected } = await prompt([

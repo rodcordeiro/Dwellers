@@ -16,7 +16,7 @@ export class DwellerService {
   }
 
   async findByName(name: string) {
-    return (await dwellerRepository.find()).find((dweller) => {
+    return (await dwellerRepository.find()).filter((dweller) => {
       if (dweller.name.toLowerCase().includes(name.toLowerCase()))
         return dweller;
     });
