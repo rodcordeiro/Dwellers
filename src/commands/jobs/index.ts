@@ -6,6 +6,7 @@ import { Spinner } from '../../utils';
 import { BuildingService } from '../../services/building.service';
 import { JobService } from '../../services/jobs.service';
 import { DwellerService } from '../../services/dwellers.service';
+import { Job } from '../../entities/Jobs';
 
 const command = new Command('job');
 const spinner = new Spinner().spinner;
@@ -24,7 +25,7 @@ command
   .action(async ({ id, place }: { id?: string; place?: string }) => {
     spinner.start('Hello Sir, requesting information...');
     const service = new JobService();
-    let data: any;
+    let data: void | Job | Job[];
     if (id) {
       data = await service
         .findById(id)
