@@ -16,18 +16,18 @@ export class Assignment {
   @PrimaryGeneratedColumn()
   _id: string;
 
+  @JoinColumn({ name: 'dweller', referencedColumnName: '_id' })
   @OneToOne(() => Dweller, (dweller) => dweller._id, {
     onUpdate: 'SET NULL',
     onDelete: 'SET NULL',
   })
-  @JoinColumn({ name: 'dweller', referencedColumnName: '_id' })
   dweller: string;
 
+  @JoinColumn({ name: 'job', referencedColumnName: '_id' })
   @ManyToOne(() => Job, (job) => job._id, {
     onUpdate: 'SET NULL',
     onDelete: 'SET NULL',
   })
-  @JoinColumn({ name: 'job', referencedColumnName: '_id' })
   job: string;
 
   @UpdateDateColumn()

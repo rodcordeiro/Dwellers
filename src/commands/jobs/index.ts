@@ -116,34 +116,53 @@ command
   .alias('a')
   .description('Assign a job to a dweller')
   .helpOption('-h,--help', 'Assign a job to a dweller')
-  .action(async () => {
+  .option('--n, --name [dweller]', 'Filter by dweller name')
+  .action(async ({ name }: { name?: string }) => {
     console.log(chalk.cyan("They're working hard, aren't they!?"));
     const service = new JobService();
     const dwellersService = new DwellerService();
     const prompt = createPromptModule();
 
     const jobs = await service.list();
-    const dwellers = await dwellersService.list();
-    const data = await prompt([
-      {
-        type: 'list',
-        name: 'dweller',
-        message: 'Select the dweller:',
-        choices: dwellers.map((dweller) => dweller.name),
-      },
-      {
-        type: 'list',
-        name: 'job',
-        message: 'Select the new job:',
-        choices: jobs.map((job) => job.name).sort(),
-      },
-    ]);
+    const dwellers = name
+      ? await dwellersService.findByName(name)
+      : await dwellersService.list();
+    const dwellerSelected = name && dwellers.length === 1;
+    const data = await prompt(
+      dwellerSelected
+        ? [
+            {
+              type: 'list',
+              name: 'job',
+              message: 'Select the new job:',
+              choices: jobs.map((job) => job.name).sort(),
+            },
+          ]
+        : [
+            {
+              type: 'list',
+              name: 'dweller',
+              message: 'Select the dweller:',
+              choices: dwellers.map((dweller) => dweller.name),
+            },
+            {
+              type: 'list',
+              name: 'job',
+              message: 'Select the new job:',
+              choices: jobs.map((job) => job.name).sort(),
+            },
+          ],
+    );
+
     spinner.start('Registration started sir!');
+    const payload = {
+      jobs: jobs.filter((job) => job.name === data.job)[0],
+      dweller: dwellerSelected
+        ? dwellers[0]
+        : dwellers.filter((dweller) => dweller.name === data.dweller)[0],
+    };
     await service
-      .assing(
-        jobs.filter((job) => job.name === data.job)[0],
-        dwellers.filter((dweller) => dweller.name === data.dweller)[0],
-      )
+      .assing(payload.jobs, payload.dweller)
       .then(() => {
         spinner.succeed('This dweller will gonna be a great worker!');
         spinner.stop();

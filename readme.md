@@ -7,11 +7,11 @@
   - [x] create
   - [x] update
   - [x] delete
-- [ ] handle buildings
+- [x] handle buildings
   - [x] list
   - [x] create
-  - [ ] update
-  - [ ] delete
+  - [x] update
+  - [x] delete
 - [ ] handle jobs
   - [x] list
   - [x] create

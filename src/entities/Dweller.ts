@@ -5,7 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Index,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Assignment } from './Assignment';
 
 @Entity('dwellers')
 @Index(
@@ -68,5 +71,7 @@ export class Dweller {
   @UpdateDateColumn()
   updated: string;
 
-  job: string;
+  @JoinColumn({ name: 'assignment', referencedColumnName: 'dweller' })
+  @OneToOne(() => Assignment, (assigment) => assigment.dweller)
+  assignments: Assignment;
 }

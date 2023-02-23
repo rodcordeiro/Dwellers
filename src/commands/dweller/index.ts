@@ -26,8 +26,8 @@ command
   .alias('l')
   .description('View all dwellers')
   .helpOption('-h,--help', 'Shows all dwellers')
-  .option('--i, --id [dweller]', 'Filter dby dweller id')
-  .option('--n, --name [dweller]', 'Filter dby dweller name')
+  .option('--i, --id [dweller]', 'Filter by dweller id')
+  .option('--n, --name [dweller]', 'Filter by dweller name')
   .action(async ({ id, name }: iFilterParams) => {
     spinner.start('Hello Sir, requesting information...');
     const service = new DwellerService();
@@ -204,7 +204,7 @@ command
   .command('update')
   .alias('u')
   .description('Update a  dweller')
-  .option('--n, --name [dweller]', 'Filter dby dweller name')
+  .option('--n, --name [dweller]', 'Filter by dweller name')
   .helpOption('-h,--help', 'Update dweller')
   .action(async ({ name }: iFilterParams) => {
     const service = new DwellerService();
@@ -238,6 +238,8 @@ command
       ]);
       dweller = list.find((d) => d.name === selected);
     }
+    console.log(chalk.cyan(`Ok, what's the news about ${dweller.name}?`));
+
     const data = await prompt([
       {
         type: 'number',
@@ -317,7 +319,7 @@ command
   .command('delete')
   .alias('d')
   .description('Delete a  dweller')
-  .option('--n, --name [dweller]', 'Filter dby dweller name')
+  .option('--n, --name [dweller]', 'Filter by dweller name')
   .helpOption('-h,--help', 'Delete a dweller')
   .action(async ({ name }: iFilterParams) => {
     const service = new DwellerService();
@@ -331,7 +333,7 @@ command
           {
             type: 'list',
             name: 'selected',
-            message: 'Who bring us some news?',
+            message: 'Who has gone to the star, sir?',
             choices: search.map((dweller) => dweller.name),
           },
         ]);
@@ -356,9 +358,7 @@ command
       .delete(dweller)
       .then(() => {
         spinner.succeed(
-          `The funeral has begun. ${
-            dweller.gender === 'F' ? 'Sh' : 'H'
-          }e will be remembered with honor!`,
+          `The funeral has begun. ${dweller.name}e will be remembered with honor!`,
         );
         spinner.stop();
       })

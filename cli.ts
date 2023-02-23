@@ -17,17 +17,17 @@ import Jobs from './src/commands/jobs';
 
 AppDataSource.initialize()
   .then(() => {
-    const cli = program;
+    const cli: typeof program = program;
     console.log(`${__dirname}/**/migrations/*.{ts,js}`);
     cli
       .version(pkg.version, '-v,--version', 'Shows cli version')
       .allowUnknownOption(false)
-      .allowExcessArguments(false);
+      .allowExcessArguments(false)
+      .showSuggestionAfterError(true);
 
     cli.addCommand(Dweller);
     cli.addCommand(Building);
     cli.addCommand(Jobs);
-
     cli.parse(process.argv);
   })
   .catch((err) => {

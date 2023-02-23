@@ -6,6 +6,7 @@ export class DwellerService {
     return await dwellerRepository.find({
       relationLoadStrategy: 'join',
       loadRelationIds: true,
+      relations: ['assignments'],
     });
   }
 
