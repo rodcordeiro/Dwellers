@@ -21,30 +21,24 @@ jobs:
       fail-fast: false
       matrix:
         language: ['typescript']
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
-
       - name: Autobuild
         uses: github/codeql-action/autobuild@v2
-
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+
   buildValidation:
     name: Validates build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
