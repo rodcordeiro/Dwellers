@@ -4,7 +4,6 @@ on:
   push:
     branches: ['main', 'feat/**', 'bug/**', 'develop']
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [main]
   schedule:
     - cron: '0 3 * * 1'
@@ -45,6 +44,5 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
       - run: yarn
       - run: yarn build
