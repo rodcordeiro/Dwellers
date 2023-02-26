@@ -55,7 +55,7 @@ command
     spinner.stop();
 
     console.table(data);
-    return;
+    process.exit(0);
   });
 
 command
@@ -108,7 +108,7 @@ command
         spinner.fail(err.message);
         spinner.stop();
       });
-    return;
+    process.exit(0);
   });
 
 command
@@ -171,6 +171,7 @@ command
         spinner.fail(err.message);
         spinner.stop();
       });
+    process.exit(0);
   });
 
 export default command;

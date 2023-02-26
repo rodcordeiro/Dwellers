@@ -16,7 +16,6 @@ export class BuildingService {
       })
       .then((response) => {
         const build = response.filter((build) => build._id === _id);
-        // console.log(build);
         return build[0];
       });
   }

@@ -5,9 +5,8 @@ import { v4 as uuid } from 'uuid';
 import { Spinner } from '../../utils';
 import { DwellerService } from '../../services/dwellers.service';
 import { Dweller } from '../../entities/Dweller';
-// import { renderDwellers } from './utils';
 
-interface iFilterParams {
+interface IFilterParams {
   id?: string;
   name?: string;
 }
@@ -28,7 +27,7 @@ command
   .helpOption('-h,--help', 'Shows all dwellers')
   .option('--i, --id [dweller]', 'Filter by dweller id')
   .option('--n, --name [dweller]', 'Filter by dweller name')
-  .action(async ({ id, name }: iFilterParams) => {
+  .action(async ({ id, name }: IFilterParams) => {
     spinner.start('Hello Sir, requesting information...');
     const service = new DwellerService();
     let data: void | Dweller | Dweller[];
@@ -62,8 +61,7 @@ command
     spinner.stop();
 
     console.table(data);
-    // console.table(renderDwellers(data));
-    return;
+    process.exit(0);
   });
 
 command
@@ -197,7 +195,7 @@ command
         spinner.fail(err.message);
         spinner.stop();
       });
-    return;
+    process.exit(0);
   });
 
 command
@@ -206,7 +204,7 @@ command
   .description('Update a  dweller')
   .option('--n, --name [dweller]', 'Filter by dweller name')
   .helpOption('-h,--help', 'Update dweller')
-  .action(async ({ name }: iFilterParams) => {
+  .action(async ({ name }: IFilterParams) => {
     const service = new DwellerService();
     const prompt = createPromptModule();
     let dweller: Dweller;
@@ -313,6 +311,7 @@ command
         spinner.fail(err.message);
         spinner.stop();
       });
+    process.exit(0);
   });
 
 command
@@ -321,7 +320,7 @@ command
   .description('Delete a  dweller')
   .option('--n, --name [dweller]', 'Filter by dweller name')
   .helpOption('-h,--help', 'Delete a dweller')
-  .action(async ({ name }: iFilterParams) => {
+  .action(async ({ name }: IFilterParams) => {
     const service = new DwellerService();
     const prompt = createPromptModule();
     let dweller: Dweller;
@@ -366,6 +365,7 @@ command
         spinner.fail(err.message);
         spinner.stop();
       });
+    process.exit(0);
   });
 
 export default command;
