@@ -1,5 +1,6 @@
 {
   "branchPrefix": "updates/",
+  "baseBranch": ["develop"],
   "packageRules": [
     {
       "updateTypes": ["minor", "patch", "pin", "digest"],
@@ -14,7 +15,8 @@
   "assignees": ["@rodcordeiro"],
   "labels": ["dependencies"],
   "recreateClosed": true,
-  "rebaseWhen": "conflicted",
+  "rebaseWhen": "behind-base-branch",
+  "reviewersFromCodeOwners": true,
   "vulnerabilityAlerts": {
     "labels": ["security"],
     "assignees": ["@rodcordeiro"]
@@ -22,6 +24,7 @@
   "extends": [
     "config:base",
     ":dependencyDashboard",
+    ":pinOnlyDevDependencies",
     "github>whitesource/merge-confidence:beta",
     "github>rodcordeiro/.github:renovate"
   ]
