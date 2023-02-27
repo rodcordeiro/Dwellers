@@ -5,3 +5,4 @@ build/
 tmp/
 temp/
 bin/
+__tests__/__coverage__
