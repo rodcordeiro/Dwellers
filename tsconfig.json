@@ -14,5 +14,5 @@
     "checkJs": false,
     "resolveJsonModule": true
   },
-  "exclude": ["__tests__/*", "*.sqlite3", "bin/"]
+  "exclude": ["__tests__/*", "*.sqlite3", "bin/","node_modules"]
 }
