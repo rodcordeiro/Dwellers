@@ -10,9 +10,10 @@
     "sourceRoot": "./",
     "outDir": "./bin",
     "declaration": true,
+    "skipLibCheck": true,
     "removeComments": true,
     "checkJs": false,
     "resolveJsonModule": true
   },
-  "exclude": ["__tests__/*", "*.sqlite3", "bin/","node_modules"]
+  "exclude": ["__tests__/*", "*.sqlite3", "bin/", "node_modules/**"]
 }
