@@ -11,7 +11,8 @@
     "outDir": "./bin",
     "declaration": true,
     "removeComments": true,
-    "checkJs": false
+    "checkJs": false,
+    "resolveJsonModule": true
   },
-  "exclude": ["__tests__", "*.sqlite3", "bin/"]
+  "exclude": ["__tests__/*", "*.sqlite3", "bin/"]
 }

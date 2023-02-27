@@ -6,9 +6,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "tsx ./cli.ts",
-    "prebuild": "rimraf bin && yarn fix",
+    "prebuild": "yarn rimraf bin && yarn fix && yarn test",
     "build": "npx tsc -b",
-    "test": "ts-jest --color",
+    "test": "jest",
     "fix": "npm run lint && npm run prettier",
     "lint": "eslint --ignore-path .eslintignore --fix --ext .ts,.tsx,.js,.jsx .",
     "prettier": "prettier --ignore-path .eslintignore --write .",
@@ -50,8 +50,10 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.1",
     "@types/cli-table": "0.3.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/jest": "^29.4.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "18.14.1",
     "@typescript-eslint/eslint-plugin": "5.51.0",
     "@typescript-eslint/parser": "5.51.0",
@@ -76,7 +78,7 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCoverage": true,
+    "collectCoverage": false,
     "collectCoverageFrom": [
       "**/*.{ts,tsx}",
       "!**/node_modules/**",

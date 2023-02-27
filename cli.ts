@@ -18,7 +18,7 @@ import Jobs from './src/commands/jobs';
 AppDataSource.initialize()
   .then(() => {
     const cli: typeof program = program;
-    console.log(`${__dirname}/**/migrations/*.{ts,js}`);
+    // console.log(`${__dirname}/**/migrations/*.{ts,js}`);
     cli
       .version(pkg.version, '-v,--version', 'Shows cli version')
       .allowUnknownOption(false)

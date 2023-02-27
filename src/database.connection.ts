@@ -5,7 +5,7 @@ import { Building } from './entities/Buildings';
 import { Job } from './entities/Jobs';
 import { Assignment } from './entities/Assignment';
 
-const db_name = process.env.NODE_ENV === 'test'?'test':'dwellers'
+const db_name = process.env.NODE_ENV === 'test' ? 'test' : 'dwellers';
 export const AppDataSource = new DataSource({
   type: 'sqlite',
   database: `${__dirname}/../${db_name}.sqlite3`,
