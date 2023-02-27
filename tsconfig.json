@@ -7,7 +7,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-"sourceRoot": "./",
+    "sourceRoot": "./",
     "outDir": "./bin",
     "declaration": true,
     "removeComments": true,
