@@ -44,7 +44,7 @@
     "dotenv": "^16.0.3",
     "inquirer": "^9.1.4",
     "reflect-metadata": "^0.1.13",
-    "sqlite3": "5.1.4",
+    "sqlite3": "5.1.6",
     "typeorm": "0.3.12",
     "update-notifier": "^6.0.2",
     "uuid": "^9.0.0"
