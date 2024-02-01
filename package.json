@@ -45,7 +45,7 @@
     "inquirer": "^9.1.4",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "5.1.7",
-    "typeorm": "0.3.17",
+    "typeorm": "0.3.20",
     "update-notifier": "^6.0.2",
     "uuid": "^9.0.0"
   },
